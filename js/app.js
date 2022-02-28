@@ -47,5 +47,27 @@ const details =async (playerName,playerId) => {
     // console.log(url);
     const res =await fetch(url);
     const data =await res.json();
-    console.log(data.players[0]);
+    // console.log
+    displayDetails(data.players[0]);
+}
+
+const displayDetails = (player) => {
+    console.log(player);
+    const detailsContainer = document.getElementById("details-container");
+    const div = document.createElement("div");
+    div.innerHTML =`
+        <div class="pro-pic w-100 mx-auto">
+            <img class="w-100"src="${player.strThumb}" alt="">
+        </div>
+        <div class="w-50 mx-auto">
+            <h4 class=" text-center"> ${player.strPlayer} </h4>
+            <h6 class="text-center"> ${player.strNationality}</h6>
+            <p>Description</p>
+            <div class="all-button">
+                <button class="btn py-1 px-2  btn-danger">Delete</button>
+                <button onclick="details('${player.strPlayer}','${player.idPlayer}')" class="btn py-1 px-2 btn-success">Details</button>
+            </div>
+        </div>
+    `;
+    detailsContainer.appendChild(div);
 }
